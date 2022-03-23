@@ -1,10 +1,80 @@
-import withHandler from '@libs/server/withHandler';
 import { NextApiRequest, NextApiResponse } from 'next';
-import client from '../../../libs/server/client';
+import withHandler from '@libs/server/withHandler';
+import client from '@libs/server/client';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-    console.log(req.body);
-    res.status(200).end();
+    // + => string to int로 변경
+    // const user = await client.user.upsert({
+    //     //upsert 수정 or 생성시 사용
+    //     where: {
+    //         ...payload,
+    //     },
+    //     create: {
+    //         name: 'Anonymous',
+    //         ...payload,
+    //     },
+    //     update: {},
+    // });
+
+    const { phone, email } = req.body;
+    const user = phone ? { phone: +phone } : { email };
+    const payload = Math.floor(100000 + Math.random() * 900000) + '';
+    const token = await client.token.create({
+        data: {
+            payload,
+            user: {
+                connectOrCreate: {
+                    where: {
+                        ...user,
+                    },
+                    create: {
+                        name: 'Anonymous',
+                        ...user,
+                    },
+                },
+            },
+        },
+    });
+    console.log(token);
+
+    /* if (email) {
+    user = await client.user.findUnique({
+        //  null or user를 반환
+      where: {
+        email,
+      },
+    });
+    if (user) console.log("found it.");
+    if (!user) {
+      console.log("Did not find. Will create.");
+      user = await client.user.create({
+        data: {
+          name: "Anonymous",
+          email,
+        },
+      });
+    }
+    console.log(user);
+  }
+  if (phone) {
+    user = await client.user.findUnique({
+      where: {
+        phone: +phone,
+      },
+    });
+    if (user) console.log("found it.");
+    if (!user) {
+      console.log("Did not find. Will create.");
+      user = await client.user.create({
+        data: {
+          name: "Anonymous",
+          phone: +phone,
+        },
+      });
+    }
+    console.log(user);
+  } */
+
     return res.status(200).end();
 }
 
