@@ -47,21 +47,21 @@ async function handler(
         },
     });
     if (phone) {
-        const message = await twilioClient.messages.create({
-            messagingServiceSid: process.env.TWILIO_MSID,
-            to: process.env.MY_PHONE!,
-            body: `Your login token is ${payload}.`,
-        });
-        console.log(message);
+        // const message = await twilioClient.messages.create({
+        //     messagingServiceSid: process.env.TWILIO_MSID,
+        //     to: process.env.MY_PHONE!,
+        //     body: `Your login token is ${payload}.`,
+        // });
+        // console.log(message);
     } else if (email) {
-        const email = await mail.send({
-            from: 'qorehddn123@naver.com',
-            to: 'qorehddn123@naver.com', //원래는 바디 데터
-            subject: 'Your carrot market verification email',
-            text: `your tkoen is ${payload}`,
-            html: `<strong>your token is ${payload}</strong>`,
-        });
-        console.log(email);
+        // const email = await mail.send({
+        //     from: 'qorehddn123@naver.com',
+        //     to: 'qorehddn123@naver.com', //원래는 바디 데터
+        //     subject: 'Your carrot market verification email',
+        //     text: `your tkoen is ${payload}`,
+        //     html: `<strong>your token is ${payload}</strong>`,
+        // });
+        // console.log(email);
     }
     return res.json({
         ok: true,
