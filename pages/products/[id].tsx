@@ -2,11 +2,12 @@ import type { NextPage } from 'next';
 import Button from '@components/button';
 import Layout from '@components/layout';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
+import useSWR, { useSWRConfig } from 'swr';
 import Link from 'next/link';
 import { Product, User } from '@prisma/client';
 import useMutation from '@libs/client/useMutation';
 import { cls } from '@libs/client/utils';
+import useUser from '@libs/client/useUser';
 
 interface ProductWithUser extends Product {
     user: User;
@@ -19,12 +20,23 @@ interface ItemDetailResponse {
 }
 
 const ItemDetail: NextPage = () => {
+    const { user, isLoading } = useUser();
     const router = useRouter();
-    const { data } = useSWR<ItemDetailResponse>(
+    const { mutate } = useSWRConfig();
+    const { data, mutate: boundMutate } = useSWR<ItemDetailResponse>(
         router.query.id ? `/api/products/${router.query.id}` : null
     );
     const [toggleFacv] = useMutation(`/api/products/${router.query.id}/fav`);
     const onFavClick = () => {
+        if (!data) return;
+
+        //이전 캐시값 사용이 가능 하다
+        // boundMutate(
+        //     (prev) => prev && { ...prev, isLiked: !prev.isLiked },
+        //     false
+        // );
+        boundMutate({ ...data, isLiked: !data.isLiked }, false);
+        // mutate('/api/users/me', (prev: any) => ({ ok: !prev.ok }), false);
         toggleFacv({});
     };
     return (
@@ -107,15 +119,9 @@ const ItemDetail: NextPage = () => {
                         Similar items
                     </h2>
                     <div className=' mt-6 grid grid-cols-2 gap-4'>
-                        {data?.relatedProducts.map((product) => (
+                        {data?.relatedProducts?.map((product) => (
                             <div key={product.id}>
                                 <div className='h-56 w-full mb-4 bg-slate-300' />
-                                <h3 className='text-gray-700 -mb-1'>
-                                    Galaxy S60
-                                </h3>
-                                <span className='text-sm font-medium text-gray-900'>
-                                    $6
-                                </span>
                                 <h3 className='text-gray-700 -mb-1'>
                                     {product.name}
                                 </h3>
