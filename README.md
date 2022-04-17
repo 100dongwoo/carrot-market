@@ -13,6 +13,7 @@
 -   npx prisma db push
 -   npx prisma studio (관리자 페이지)
 -   npx prisma generate
+-   npx prisma db seed (package.json 및 seed 파일 참조)
 
 ## SWR mutate({첫번째 인자},두번째인자)
 
