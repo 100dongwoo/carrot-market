@@ -25,8 +25,10 @@
 
 ## 공부내용
 
+-   previewImage 방법
+
 ```input을통한 이미지를 가져오는법
     const file = avartar[0];
     console.log(URL.createObjectURL(file));
-}
+
 ```
