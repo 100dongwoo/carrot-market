@@ -46,9 +46,7 @@ const CommunityPostDetail: NextPage = () => {
     const [wonder, { loading }] = useMutation(
         `/api/posts/${router.query.id}/wonder`
     );
-
     const { register, handleSubmit, reset } = useForm<AnswerForm>();
-
     const [sendAnswer, { data: answerData, loading: answerLoading }] =
         useMutation<AnswerResponse>(`/api/posts/${router.query.id}/answers`);
 

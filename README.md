@@ -22,3 +22,11 @@
 
 -   해당화면에서 얻은 데이터만 변경하기위해서는 boundMutate
 -   다른화면 데이터 변경을 위해서는 unboundMutate
+
+## 공부내용
+
+```input을통한 이미지를 가져오는법
+    const file = avartar[0];
+    console.log(URL.createObjectURL(file));
+}
+```
