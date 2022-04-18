@@ -32,3 +32,13 @@
     console.log(URL.createObjectURL(file));
 
 ```
+
+-   Dynamic Imports
+
+1. import는 유저가 다운로드해야하는 자바스크립트 코드이다 (문제점)
+2. Dynamic Imports 사용시에만 다운받는다
+
+```
+    const Bs=dynamic(()=>import("../../test"))
+
+```
