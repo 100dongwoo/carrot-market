@@ -8,7 +8,7 @@ import { cls } from '@libs/client/utils';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
-const Bs = dynamic(
+const Bs = dynamic<any>(
     () =>
         new Promise((resolve) =>
             setTimeout(() => resolve(import('@components/bs')), 10000)
