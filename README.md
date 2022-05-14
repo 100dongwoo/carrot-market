@@ -23,6 +23,36 @@
 -   해당화면에서 얻은 데이터만 변경하기위해서는 boundMutate
 -   다른화면 데이터 변경을 위해서는 unboundMutate
 
+### NextJS Scripts
+
+-   Script 컴포넌트를 제공
+-
+-   props (스크립트를 언제 받아올건지 정할 수있음)
+
+```
+#### strategy
+- beforInteractive : 페이지를 다 불러와서 상호작용 전에 스크립트 불러옴
+- afterInteractive (default) : 페이지를 다불러 온후 스크립트 불러옴
+- lazyOnLoad       : 스크립트를 불러오는게 우선순위가아님 모든 데이터를 다 가져온 후 불러옴
+```
+
+### serverSide
+
+```
+#### getServerSideProps
+- 캐시등을 사용하지못함
+
+#### getStaticPaths
+
+
+#### getStaticProps
+- 1번만 실행 export 된후 일반 htmlfh 될 때 실행
+- html을 생성할수있도록 해준다
+
+#### Incremental Static Regeneration
+
+```
+
 ## 공부내용
 
 -   previewImage 방법
