@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <div className='w-full max-w-xl mx-auto'>
                 <Component {...pageProps} />
             </div>
-            <Script
+            {/* <Script
                 // async
                 // defer
                 // crossorigin='anonymous'
@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                         });
                     };
                 }} //스크립트 호출 된 후 실행되는 함수
-            />
+            /> */}
         </SWRConfig>
     );
 }

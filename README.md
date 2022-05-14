@@ -53,6 +53,23 @@
 
 ```
 
+### ISR ( Incremental Static Regeneration )
+
+```
+export async function getStaticProps() {
+    // ISR   Incremental Static Regeneration
+    const posts = await client.post.findMany({ include: { user: true } });
+    return {
+        props: {
+            posts: JSON.parse(JSON.stringify(posts)),
+        },
+        revalidate: 10, //최신데이터를 담당하는 윈도우
+        // 백그라운드에서 해당 페이지 빌드해줌 html을 불러옴
+    };
+}
+
+```
+
 ## 공부내용
 
 -   previewImage 방법
