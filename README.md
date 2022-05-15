@@ -94,12 +94,20 @@ export async function getStaticProps() {
         await res.unstable_revalidate('/community');  //수동으로 한다고 생각하면된다
 ```
 
-### Incremental Static Regeneration
+## React 18
 
--
+#### React server components
+
+-   자바스크립트를 로드 할 필요가없다
+-   next.config.js 수정
 
 ```
-
+module.exports = {
+  experimental: {
+    runtime: 'nodejs',
+    serverComponents: true,
+  },
+}
 ```
 
 ## 공부내용
