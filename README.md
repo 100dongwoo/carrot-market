@@ -43,12 +43,27 @@
 - 캐시등을 사용하지못함
 
 #### getStaticPaths
+- 페이지들이 빌드타임에  만들어져야하는지 체크하는 역할을 한다
+```
 
+    return {
+        paths: [],
+        fallback: 'blocking',
+               // 처음에 전부다 build파일을 만드는게 아니라 첫유저가 들어왔을시 해당부분만 만든다 방문시에만 만든다
+
+        fallback: false  //프로젝트 빌드탕미에서 필요한것들은 미리만듬 페이지가 존재하지않으면 404페이지로 가게함 그이후로는  추가로 만들지않음
+
+        fallback: True //request 타임에 페이지 생성, 페이지가 생성하는동안 데이터를 보여준다 (html파일이없으면 생성 )
+
+        true , "blocking" 차이는 유저가 페이지를 최초 만들어지는 동안 볼수있냐 없냐  차이
+    };
+
+```
 
 #### getStaticProps
 - 1번만 실행 export 된후 일반 htmlfh 될 때 실행
 - html을 생성할수있도록 해준다
-
+- 최초로 한번만 실행됨
 #### Incremental Static Regeneration
 
 ```
@@ -67,6 +82,23 @@ export async function getStaticProps() {
         // 백그라운드에서 해당 페이지 빌드해줌 html을 불러옴
     };
 }
+
+```
+
+### ODR ( On - demand Revalidation ) 사용자의 요청 재검증 next 12.1 부터 가능
+
+-   getStaticProps를 api 핸들러 작동
+
+```
+  // ODR  해당 페이지를 강제로 revalidate 해줌 (getStaticProps에 있는 ODR을 사용시 revalidate를 지운다)
+        await res.unstable_revalidate('/community');  //수동으로 한다고 생각하면된다
+```
+
+### Incremental Static Regeneration
+
+-
+
+```
 
 ```
 

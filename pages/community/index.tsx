@@ -116,7 +116,8 @@ export async function getStaticProps() {
         props: {
             posts: JSON.parse(JSON.stringify(posts)),
         },
-        revalidate: 10, //최신데이터를 담당하는 윈도우
+        // ODR을 사용시 revalidate를 지운다
+        // revalidate: 10, //최신데이터를 담당하는 윈도우
         // 백그라운드에서 해당 페이지 빌드해줌 html을 불러옴
     };
 }

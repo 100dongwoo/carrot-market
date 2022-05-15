@@ -7,11 +7,12 @@ export function middleware(req: NextRequest, ev: NextFetchEvent) {
             status: 403,
         });
     }
-    if (!req.url.includes('/api')) {
-        if (!req.url.includes('/enter') && !req.cookies.carrotsession) {
-            return NextResponse.redirect(`${req.nextUrl.origin}/enter`);
-        }
-    }
+    // if (!req.url.includes('/api')) {
+    //     if (!req.url.includes('/enter') && !req.cookies.carrotsession) {
+    //         return NextResponse.redirect(`${req.nextUrl.origin}/enter`);
+    //     }
+    // }
+
     // console.log(req.geo?.city);
     // 배포시에만 작동한다
 
